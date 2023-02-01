@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 // const bodyParser = require('body-parser');
 const mysql = require('mysql');
-
+const port = process.env.PORT || 8000;
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -55,17 +55,7 @@ app.post("/workers", (req, res) => {
     }
   });  
 });
-// app.put('/update/:id', (req, res) => {
-//   const data = req.body;
-//   console.log(data)
-//    const sql = `UPDATE workers SET (name, sector, terms) VALUES (?, ?, ?) WHERE id = ${req.params.id}`;
-//   connection.query(sql, (error, results) => {
-//     if (error) {
-//       return res.status(500).json({ error });
-//     }
-//     return res.json({ message: 'Data updated successfully' });
-//   });
-// });
+ 
 app.get('/workers/:id', (req, res) => {
   const {id} = req.params
   const sql = 'SELECT * FROM workers where id = ?'
@@ -78,31 +68,6 @@ app.get('/workers/:id', (req, res) => {
   });
 });
 
-app.get('/update/:id', (req, res) => {
-  const id = req.params.id;
-  // const { name, sector, terms } = req.body;
-  console.log("All data", req.body)
-   
-   console.log("this is" , id)
-  //  const sql = 'UPDATE workers SET name = ?, sector = ?, terms = ?, WHERE id = ?';
-  //  const values = [name, sector, terms,id];
-  const sql = `UPDATE workers SET name= '${req.body.name}'  sector = '${req.body.sector}', terms = ${req.body.terms} WHERE id = ${req.params.id}`;
-  connection.query(sql, (error, results) => {
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      console.log('Result',results)
-      res.send(results);
-    }
-  //   }
-  // connection.query(sql, [...values, id], (error, results) => {
-  //   if (error) throw error;
-  //   res.status(200).json({ message: 'Data updated successfully' });
-  // });
-   
-  
-})   
-});
 app.put('/update/:id', async (req, res) => {
   const id = req.params.id;
   const { name, sector, terms } = req.body;
@@ -119,6 +84,6 @@ app.put('/update/:id', async (req, res) => {
     res.status(500).send('Error updating record');
   }
 });
-app.listen(8000, () => {
-  console.log('API running on port 8000');
+app.listen(port, () => {
+  console.log(`API running on port ${port}`);
 });
