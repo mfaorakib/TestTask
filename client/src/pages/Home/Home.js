@@ -67,12 +67,13 @@ function Home() {
         .post("http://localhost:8000/workers", data)
         .then(function (response) {
           console.log("post Data", response.data);
+          window.location.reload();
         })
         .catch(function (error) {
           console.error(error);
         });
     }
-    window.location.reload();
+    
   };
 
   //Single Member Details API Call 
@@ -109,12 +110,13 @@ function Home() {
         .put(`http://localhost:8000/update/${id} `, data)
         .then(function (response) {
           console.log("put Data", response.data);
+          window.location.reload();
         })
         .catch(function (error) {
           console.error(error);
         });
     }
-    window.location.reload();
+    
   }
 
   return (
