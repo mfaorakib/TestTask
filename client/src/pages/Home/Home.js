@@ -17,7 +17,7 @@ function Home() {
   const [formData, setFormData] = useState({});
   // All Sector Members details API Call For Table
   useEffect(() => {
-    axios.get('http://localhost:8000/workers')
+    axios.get('https://test-task-csi0yfc18-mfaorakib.vercel.app/workers')
       .then(res => setmembers(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -37,7 +37,7 @@ function Home() {
 
   // All Sectors Options Call form API
   useEffect(() => {
-    axios.get('http://localhost:8000/sectors')
+    axios.get('https://test-task-csi0yfc18-mfaorakib.vercel.app/sectors')
       .then(res => setOptions(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -64,7 +64,7 @@ function Home() {
         terms: termsAgreed
       };
       axios
-        .post("http://localhost:8000/workers", data)
+        .post("https://test-task-csi0yfc18-mfaorakib.vercel.app/workers", data)
         .then(function (response) {
           console.log("post Data", response.data);
           window.location.reload();
@@ -79,7 +79,7 @@ function Home() {
   //Single Member Details API Call 
   const SubmitWorker = (id) => {
     setForm(2)
-    axios.get(`http://localhost:8000/workers/${id}`)
+    axios.get(`https://test-task-csi0yfc18-mfaorakib.vercel.app/workers/${id}`)
 
       .then(res => {
         const [worker] = res.data
@@ -107,7 +107,7 @@ function Home() {
       };
       console.log("Update Data", data)
       axios
-        .put(`http://localhost:8000/update/${id} `, data)
+        .put(`https://test-task-csi0yfc18-mfaorakib.vercel.app/update/${id} `, data)
         .then(function (response) {
           console.log("put Data", response.data);
           window.location.reload();
